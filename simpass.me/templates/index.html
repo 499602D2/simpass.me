@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="simpass.me">
+
+		<!-- Dark and light theme -->
+		<meta name="color-scheme" content="dark light">
+
+		<!-- Title -->
+		<title>simpass.me</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g==" crossorigin="anonymous" />
+
+		<!-- Punycode -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/punycode/1.4.1/punycode.min.js" integrity="sha512-YZlXEJ9dOHnIn3LXSS3RpbhAtTQZWw2VOywaMsC8p7/0DyGu0gEf0pFhkQtE/i4pQpgGUDY7cicb401Tf/5sRA==" crossorigin="anonymous"></script>
+
+		<!-- Local CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
+		<!-- Optional JavaScript for Bootstrap: jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script>
+
+		<!-- Local scripts: defined after jquery -->
+		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-dark justify-content-center align-items-center pt-3">
+			<a class="navbar-brand" href="/">simpass.me</a>
+			<a id="monky" class="pt-1">🐒</a>
+		</nav>
+
+		<div class="h-100 d-flex justify-content-center align-items-center vertical-center">
+			<div>
+				<div id="form_div" class="form py-4">
+					<div class="form-row justify-content-center">
+						<div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-4 text-center">
+							<label for="lengthSelect" class="fieldLabel">length</label>
+							<input id="lengthSelect" type="tel" min="1" value="12" class="form-control" placeholder="length" required>
+						</div>
+
+						<div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-4 text-center">
+							<label for="complexitySelect" class="fieldLabel">complexity</label>
+							<select id="complexitySelect" class="custom-select">
+								<option value="readable" selected>readable</option>
+								<option value="base64">base64</option>
+								<option value="symbols">symbols</option>
+								<option value="symbols readable">symbols (r)</option>
+								<option value="hex">hexadecimal</option>
+								<option value="url-safe">url-safe</option>
+								<option value="numeric">numeric</option>
+								<option value="distinguishable">distinct</option>
+							</select>
+						</div>
+
+						<div class="py-1 col-12"></div>
+
+						<div class="input-group py-4 mb-3 col-11 col-sm-10 col-md-6 col-lg-6 col-xl-6">
+							<div class="input-group-prepend">
+								<button id="copyButton" class="btn btn-outline-secondary" type="button">copy</button>
+							</div>
+
+							<input id="generatorOutput" type="text" class="form-control" placeholder="" aria-label="password generator output" readonly>
+
+							<p class="col-12 mt-3 text-center copyNotifyText"><a class="p-0 mr-1 copyNotifyText">✅</a> Password copied!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="page-footer fixed-bottom">
+			<!-- Copyright -->
+			<div class="container text-center col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
+				<p>All passwords are generated locally on your device and are cryptographically strong, drawing randomness from the lowest available source in your system. Passwords are not sent or stored anywhere.</p>
+			</div>
+
+			<div class="footer-copyright text-center pb-3">
+				<a id="sauce" href="https://github.com/499602D2/simpass.me">source code</a>
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+
+
+
+
+
+
