@@ -144,6 +144,7 @@ p {
 #sauce:hover,
 #sauce:active {
 	color: #EEEEEE;
+	font-size: 13px;
 }
 
 /* Class styles */
