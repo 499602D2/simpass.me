@@ -130,10 +130,15 @@ async function passGen(event) {
 
 		// if readable, generate in pairs of 4
 		var generated = '';
+		var n = 0;
 		if (type == 'readable') {
-			for (var i=0; i < length; i += 4) {
-				var generated = generated.concat(cryptoRandomString({length: 4, type: 'base64'}));
-				if (i+4 < length) { var generated = generated.concat('-'); }
+			for (var i=0; i < length; i += 1) {
+				var generated = generated.concat(cryptoRandomString({length: 1, type: 'base64'}));
+				if (n == 3) {
+					if (i+1 < length) { var generated = generated.concat('-'); }
+					i += 1;
+					n = 0;
+				} else { n += 1; }
 			}
 		} else if (type == 'symbols' || type == 'symbols readable') {
 			if (type == 'symbols') {
@@ -141,9 +146,13 @@ async function passGen(event) {
 				var generated = cryptoRandomString({length: length, characters: symbolic_set});
 			} else {
 				var symbolic_set = '!"#$%&\'()*+,-.0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-				for (var i=0; i < length; i += 4) {
-					var generated = generated.concat(cryptoRandomString({length: 4, characters: symbolic_set}));
-					if (i+4 < length) { var generated = generated.concat('/'); }
+				for (var i=0; i < length; i += 1) {
+					var generated = generated.concat(cryptoRandomString({length: 1, characters: symbolic_set}));
+					if (n == 3) {
+						if (i+1 < length) { var generated = generated.concat('/'); }
+							i += 1;
+							n = 0;
+					} else { n += 1; }
 				}
 			}
 		} else {
