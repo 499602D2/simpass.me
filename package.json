@@ -1,0 +1,24 @@
+{
+  "name": "simpass.me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/499602D2/simpass.me.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/499602D2/simpass.me/issues"
+  },
+  "homepage": "https://github.com/499602D2/simpass.me#readme",
+  "dependencies": {
+    "crypto-random-string": "^3.2.0",
+    "string-entropy": "0.0.2"
+  }
+}
