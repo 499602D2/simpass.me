@@ -1,48 +1,22 @@
 /* Available color schemes */
 :root {
-	color-scheme: light dark;
+	color-scheme: dark;
+
+	--dark-theme-background: #111;
+	--dark-theme-text: #EEEEEE;
+	--dark-theme-button-color: #212121;
+	--dark-theme-select-color: #424242;
+	--dark-theme-selection-color: #9E9E9E;
 }
-
-/* Dark theme specific styles */
-body {
-	color: #fefefe;
-	background-color: #111;
-	overflow-y: hidden;
-	overflow-x: hidden;
-}
-
-#passgen_button {
-	color: #111;
-	background-color: #fafafa;
-	border-color: #212121;
-}
-
-#options_link {
-	border-bottom: 2px dashed #fafafa;
-}
-
-/* Light theme specific styles
-@media screen and (prefers-color-scheme: light) {
-	body {
-		color: #111;
-		background-color: #fefefe;
-	}
-
-	#passgen_button {
-		color: #fafafa;
-		background-color: #111;
-		border-color: #212121
-	}
-
-	#options_link {
-		border-bottom: 2px dashed #111;
-	}
-}
-*/
-
 /* General styles */
 body {
 	font-family: 'Ubuntu Mono', monospace;
+
+	color: var(--dark-theme-text);
+	background-color: var(--dark-theme-background);
+
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 h3 {
@@ -54,15 +28,11 @@ p {
 }
 
 /* Element-specific styles */
-#header_div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 #monky {
 	transition: 0.6s;
 	font-size: 20px;
+	width: 34px;
+	height: 34px;
 }
 
 #form_div {
@@ -73,46 +43,57 @@ p {
 
 #complexitySelect,
 #lengthSelect {
-	background-color: #212121;
-	color: #EEEEEE;
-	border-color: #212121;
+	background-color: var(--dark-theme-button-color);
+	color: var(--dark-theme-text);
+	border-color: var(--dark-theme-button-color);
 }
 
 #complexitySelect:focus,
 #complexitySelect:active,
 #lengthSelect:focus,
 #lengthSelect:active {
-	border-color: #212121;
+	border-color: var(--dark-theme-button-color);
 	box-shadow: none;
 }
 
 #lengthSelect::-moz-selection {
-	color: #9E9E9E;
+	color: var(--dark-theme-selection-color);
 }
 
 #lengthSelect::selection {
-	color: #9E9E9E;
+	color: var(--dark-theme-selection-color);
 }
 
 #copyButton {
-	background-color: #212121;
-	color: #EEEEEE;
-	border-color: #212121;
+	background-color: var(--dark-theme-button-color);
+	color: var(--dark-theme-text);
+	border-color: var(--dark-theme-button-color);
+}
+
+#copyButton:active,
+#copyButton:focus {
+	background-color: var(--dark-theme-button-color);
+	color: var(--dark-theme-text);
+
+	box-shadow: inset 0em 0em 0em 4em rgba(8, 8, 8, .6);
+	border-color: rgba(6, 6, 6, 1);
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 
 #generatorOutput {
-	background-color: #424242;
-	color: #EEEEEE;
-	border-left-color: #212121;
-	border-color: #212121;
+	background-color: var(--dark-theme-select-color);
+	color: var(--dark-theme-text);
+	border-color: var(--dark-theme-select-color);
+	border-left-color: var(--dark-theme-button-color);
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
 
 #generatorOutput:focus,
 #generatorOutput:active {
-	border-color: #212121;
-	border-left-color: #212121;
+	border-color: var(--dark-theme-select-color);
+	border-left-color: var(--dark-theme-button-color);
 	box-shadow: none;
 }
 
@@ -126,7 +107,8 @@ p {
 
 .copyNotifyText {
 	font-size: 15px;
-	color: #EEEEEE;
+	color: var(--dark-theme-text);
+
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.6s ease-out;
@@ -135,7 +117,7 @@ p {
 
 #footer {
 	background-color: none;
-	color: #EEEEEE;
+	color: var(--dark-theme-text);
 }
 
 #sauce,
@@ -143,7 +125,7 @@ p {
 #sauce:visited,
 #sauce:hover,
 #sauce:active {
-	color: #EEEEEE;
+	color: var(--dark-theme-text);
 	font-size: 13px;
 }
 
@@ -151,8 +133,8 @@ p {
 .vertical-center {
 	display: flex;
 	align-items: center;
-	min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
-	min-height: 80vh; /* These two lines are counted as one :-)       */
+	min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+	min-height: 50vh; /* These two lines are counted as one :-)       */
 }
 
 .popover-box {
@@ -161,5 +143,5 @@ p {
 }
 
 .fieldLabel {
-	color: #EEEEEE;
+	color: var(--dark-theme-text);
 }
