@@ -1,4 +1,6 @@
 var cryptoRandomString = require('crypto-random-string');
+var entropy = require('string-entropy')
+var animationQueue = [];
 
 var monkySpins = 1;
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,8 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		spinMonky();
 	});
 
+	// verify length input
+	$('#lengthSelect').on('input', verifyInput);
+
 	// run forever
-	var intervalID = window.setInterval(passGen, [250]);
+	window.refreshIntervalId = window.setInterval(passGen, [250]);
 
 	// listen for copy-button clicks
 	$("#copyButton").click(function() {
@@ -17,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.execCommand('copy');
 		spinMonky();
 		copyNotify();
+		calcEntropy();
 	});
 
 	$("#generatorOutput").click(function() {
@@ -25,27 +31,44 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.execCommand('copy');
 		spinMonky();
 		copyNotify();
+		calcEntropy();
 	});
 
 	// spin the monky!
 	spinMonky();
-
-	// set popovers
-	$(function () {
-		$('[data-toggle="popover"]').popover()
-	})
-
-	// enable dismiss
-	$('.popover-dismiss').popover({
-		trigger: 'focus'
-	})
 });
+
+function verifyInput() {
+	if ($('#lengthSelect').val() < 0) {
+		$('#lengthSelect').val(Math.abs($('#lengthSelect').val()));
+	}
+
+	// if length is huge, run less often
+	if ($('#lengthSelect').val() >= 2048) {
+		clearInterval(window.refreshIntervalId);
+		window.refreshIntervalId = window.setInterval(passGen, [550]);
+	}
+	else if ($('#lengthSelect').val() >= 512) {
+		clearInterval(window.refreshIntervalId);
+		window.refreshIntervalId = window.setInterval(passGen, [350]);
+	} else if ($('#lengthSelect').val() < 512) {
+		clearInterval(window.refreshIntervalId);
+		window.refreshIntervalId = window.setInterval(passGen, [250]);
+	}
+}
+
+function calcEntropy() {
+	$('#entropyVal').text(entropy($('#generatorOutput').val()));
+}
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function copyNotify() {
+	// add the upcoming animation to the queue
+	animationQueue.unshift('fadeIn');
+
 	var elements = document.getElementsByClassName('copyNotifyText')
 	for(var i=0; i < elements.length; i++) {
 		elements[i].style.opacity = '1';
@@ -53,13 +76,20 @@ async function copyNotify() {
 		elements[i].style.visibility = 'visible';
 	}
 
-	await sleep(2500);
+	// after 300 ms transition done -> pop
+	await sleep(300)
+	animationQueue.pop()
 
-	for(var i=0; i < elements.length; i++) {
-		elements[i].style.opacity = '0';
-		elements[i].style.transition = 'opacity 750ms ease-out';
-		await sleep(750);
-		elements[i].style.visibility = 'hidden';
+	await sleep(2200);
+
+	// if animation queue is empty, fade out
+	if (animationQueue.length == 0) {
+		elements[0].style.opacity = '0';
+		elements[1].style.opacity = '0';
+		elements[0].style.visibility = 'hidden';
+		elements[1].style.visibility = 'hidden';
+		elements[0].style.transition = 'visibility 750ms, opacity 750ms';
+		elements[1].style.transition = 'visibility 750ms, opacity 750ms';
 	}
 }
 
@@ -162,11 +192,6 @@ async function passGen(event) {
 		$('#generatorOutput').val(generated);
 	} else {
 		$('#generatorOutput').val('waiting...');
+		$('#entropyVal').text(entropy('waiting...'));
 	}
 }
-
-
-
-
-
-
