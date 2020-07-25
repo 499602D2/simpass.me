@@ -18,9 +18,6 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g==" crossorigin="anonymous" />
 
-		<!-- Punycode -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/punycode/1.4.1/punycode.min.js" integrity="sha512-YZlXEJ9dOHnIn3LXSS3RpbhAtTQZWw2VOywaMsC8p7/0DyGu0gEf0pFhkQtE/i4pQpgGUDY7cicb401Tf/5sRA==" crossorigin="anonymous"></script>
-
 		<!-- Local CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
@@ -37,15 +34,15 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-dark justify-content-center align-items-center pt-3">
-			<a class="navbar-brand" href="/">simpass.me</a>
-			<a id="monky" class="pt-1">🐒</a>
+		<nav class="navbar navbar-dark justify-content-center align-items-center pt-5">
+			<a class="navbar-brand" href="/" title="Simple password generation and management locally">simpass.me</a>
+			<img id="monky" class="pt-1" title="monky :)" src="{{ url_for('static', filename='img/favicon.png') }}">
 		</nav>
 
-		<div class="h-100 d-flex justify-content-center align-items-center vertical-center">
+		<div class="h-100 d-flex justify-content-center align-items-center vertical-center pt-5">
 			<div>
 				<div id="form_div" class="form py-4">
-					<div class="form-row justify-content-center">
+					<div class="form-row justify-content-center px-5 mx-5">
 						<div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-4 text-center">
 							<label for="lengthSelect" class="fieldLabel">length</label>
 							<input id="lengthSelect" type="tel" min="1" value="14" class="form-control" placeholder="length" required>
@@ -74,7 +71,7 @@
 
 							<input id="generatorOutput" type="text" class="form-control" placeholder="" aria-label="password generator output" readonly>
 
-							<p class="col-12 mt-3 text-center copyNotifyText"><a class="p-0 mr-1 copyNotifyText">✅</a> Password copied!</p>
+							<p id="copyNotifyText" class="container px-5 col-12 mt-3 text-center copyNotifyText"><a class="p-0 mr-1 copyNotifyText">✅</a> Password copied! <a id="entropyVal" class="p-0">0</a> bits of entropy.</p>
 						</div>
 					</div>
 				</div>
@@ -85,7 +82,7 @@
 		<footer class="page-footer fixed-bottom">
 			<!-- Copyright -->
 			<div class="container text-center col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
-				<p>All passwords are generated locally on your device and are cryptographically strong, drawing randomness from the lowest available source in your system. Passwords are not sent or stored anywhere.</p>
+				<p>All passwords are generated locally on your device and are cryptographically strong, drawing randomness from the lowest available source in your system. Passwords are not sent or stored anywhere. This page collects basic analytics with Google Analytics.</p>
 			</div>
 
 			<div class="footer-copyright text-center pb-3">
