@@ -2,7 +2,6 @@
 # /usr/bin/python3
 import os
 import secrets
-import logging
 
 from flask import Flask, request, render_template, make_response, abort, send_from_directory
 from flask_talisman import Talisman
@@ -51,12 +50,6 @@ talisman = Talisman(
 app.config['MINIFY_HTML'] = True
 htmlmin = HTMLMIN(app)
 
-# setup logging
-logging.basicConfig(
-	filename='app_log.log', level=logging.DEBUG,
-	format='%(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M:%S'
-)
-
 
 @app.errorhandler(404)
 def page_not_found(caught_error):
@@ -68,8 +61,6 @@ def page_not_found(caught_error):
 	Returns:
 		TYPE: a 404 reponse + 404.html
 	"""
-
-	logging.error('404 error caught by page_not_found(): %s', caught_error)
 
 	return render_template('index.html'), 404
 
@@ -116,8 +107,6 @@ def load_url(site_url: str):
 	Returns:
 		TYPE: Description
 	"""
-
-	logging.info('User loaded %s page', site_url)
 
 	# if url is invalid, abort with a 404 code
 	valid_urls = {'', 'index'}
