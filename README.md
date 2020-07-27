@@ -13,7 +13,7 @@ Password generation is performed with the excellent [crypto-random-string](https
 
 ### Minification
 
-The domain serves extremely minified versions of the files found in this repository. The served `bundle.js` file has been minified with https://jscompress.com: you can verify that they are equal by performing a direct comparison, or trusting the hashes listed here. Hash of the served JS file (`bundle.min.js`) can be found in the footer of the page, and is recalculated on each request.
+The domain serves extremely minified versions of the files found in this repository. The served `bundle.js` file has been minified with https://jscompress.com. Hash of the served JS file (`bundle.min.js`) can be found in the footer of the page, and is recalculated on each request: you can verify that they are equal by either trusting the backend and that hashes listed here are valid, or performing a direct comparison yourself.
 
 
 ### To-do
