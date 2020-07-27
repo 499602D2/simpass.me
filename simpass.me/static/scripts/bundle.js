@@ -164,14 +164,14 @@ module.exports = entropy;
 
 },{}],3:[function(require,module,exports){
 var cryptoRandomString = require('crypto-random-string');
-var entropy = require('string-entropy')
+var entropy = require('string-entropy');
 var animationQueue = [];
 
-var monkySpins = 1;
+var chimpuSpins = 1;
 document.addEventListener('DOMContentLoaded', () => {
-	// spin the monky :)
-	$("#monky").mouseenter(function(event) {
-		spinMonky();
+	// spin the chimpu :)
+	$("#chimpu").mouseenter(function(event) {
+		spinchimpu();
 	});
 
 	// verify length input
@@ -180,28 +180,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	// run forever
 	window.refreshIntervalId = window.setInterval(passGen, [250]);
 
-	// listen for copy-button clicks
-	$("#copyButton").click(function() {
-		$('#generatorOutput').focus();
-		$('#generatorOutput').select();
-		document.execCommand('copy');
-		spinMonky();
-		copyNotify();
-		calcEntropy();
+	// copy button clicks
+	document.getElementById("copyButton").addEventListener("click", event => {
+		onCopy();
 	});
 
-	$("#generatorOutput").click(function() {
-		$('#generatorOutput').focus();
-		$('#generatorOutput').select();
-		document.execCommand('copy');
-		spinMonky();
-		copyNotify();
-		calcEntropy();
+	// output field clicks
+	document.getElementById("generatorOutput").addEventListener("click", event => {
+		onCopy();
 	});
 
-	// spin the monky!
-	spinMonky();
+	// spin chimpu
+	spinchimpu();
 });
+
+function onCopy() {
+	$('#generatorOutput').focus();
+	$('#generatorOutput').select();
+	document.execCommand("copy");
+
+	calcEntropy();
+	copyNotify();
+	spinchimpu();
+}
 
 function verifyInput() {
 	if ($('#lengthSelect').val() < 0) {
@@ -211,11 +212,11 @@ function verifyInput() {
 	// if length is huge, run less often
 	if ($('#lengthSelect').val() >= 2048) {
 		clearInterval(window.refreshIntervalId);
-		window.refreshIntervalId = window.setInterval(passGen, [1000]);
+		window.refreshIntervalId = window.setInterval(passGen, [550]);
 	}
 	else if ($('#lengthSelect').val() >= 512) {
 		clearInterval(window.refreshIntervalId);
-		window.refreshIntervalId = window.setInterval(passGen, [500]);
+		window.refreshIntervalId = window.setInterval(passGen, [350]);
 	} else if ($('#lengthSelect').val() < 512) {
 		clearInterval(window.refreshIntervalId);
 		window.refreshIntervalId = window.setInterval(passGen, [250]);
@@ -258,47 +259,57 @@ async function copyNotify() {
 	}
 }
 
-function copyToClipboard() {
-	// select text
-	var copyText = document.getElementById('generatorOutput');
-
-	console.log('copyText:', copyText);
-
-	copyText.select();
-	copyText.setSelectionRange(0, 99999);
-
-	// Copy the text inside the text field
-	document.execCommand("copy");
+function spinchimpu() {
+	var chimpu = document.getElementById('chimpu');
+	chimpu.style.transition = '0.6s';
+	chimpu.style.transform = `rotate(${chimpuSpins*360}deg)` ;
+	chimpuSpins += 1;
 }
 
-function spinMonky() {
-	var monky = document.getElementById('monky');
-	monky.style.transition = '0.6s';
-	monky.style.transform = `rotate(${monkySpins*360}deg)` ;
-	monkySpins += 1;
-}
+function readableSequence(len, type, splitChar, customSet) {
+	var length = (Number(len) || 12);
+	var type = (type || 'base64');
+	var splitChar = (splitChar || '-');
 
-function getRandomInt(min, max) {
-	// Create byte array and fill with 1 random number
-	var byteArray = new Uint8Array(1);
-	window.crypto.getRandomValues(byteArray);
+	var n = 0;
+	var generated = '';
+	for (var i=0; i < length; i) {
+		// if enough margin, generate 4 characters at once: else, just one
+		if (length - i > 3) {
 
-	for (var i=0; i < 1; i -= 1) {
-		if (byteArray[0] < min) {
-			console.log(byteArray[0], '<', min);
-			var byteArray = new Uint8Array(1);
-			window.crypto.getRandomValues(byteArray);
-		} else if (byteArray[0] > max) {
-			console.log(byteArray[0], '>', max);
-			var byteArray = new Uint8Array(1);
-			window.crypto.getRandomValues(byteArray);
+			// if customSet is defined, use that
+			if (customSet) {
+				var generated = generated.concat(cryptoRandomString({length: 4, characters: customSet}));
+			} else {
+				// else, use type
+				var generated = generated.concat(cryptoRandomString({length: 4, type: type}));
+			}
+
+			i += 4;
+			n += 4;
+
 		} else {
-			console.log('i=1');
-			i = 1;
+			// if customSet is defined, use that
+			if (customSet) {
+				var generated = generated.concat(cryptoRandomString({length: 1, characters: customSet}));
+			} else {
+				// else, use type
+				var generated = generated.concat(cryptoRandomString({length: 1, type: type}));
+			}
+
+			i += 1;
+			n += 1;
+		}
+
+		// if three chars, add a splitChar, set n=0 and i += 1
+		if (n == 4) {
+			if (i+1 <= length) { var generated = generated.concat(splitChar); }
+			i += 1;
+			n = 0;
 		}
 	}
 
-	return byteArray[0];
+	return generated;
 }
 
 // on generate button press, generate a password and show the copy-button
@@ -307,51 +318,40 @@ async function passGen(event) {
 		// get length and type from document
 		var len = document.getElementById('lengthSelect').value;
 		var type = document.getElementById('complexitySelect').value;
+		var readable = document.getElementById('readableSelect').value;
 
-		// get length and complexity
+		// get length, complexity and readable boolean
 		var length = (Number(len) || 12);
 		var type = (type || 'base64');
+		var readable = (readable || 'true');
 
 		// available types
 		var validTypes = [
-			'readable', 'base64', 'symbols', 'symbols readable',
-			'hex', 'url-safe', 'numeric', 'distinguishable'
+			'readable', 'base64', 'symbols', 'hex',
+			'url-safe', 'numeric', 'distinguishable'
 		];
 
-		// check validity
+		// check validity: if false, use b64
 		if (validTypes.includes(type) == false) {
 			type = 'base64';
 		}
 
 		// if readable, generate in pairs of 4
 		var generated = '';
-		var n = 0;
-		if (type == 'readable') {
-			for (var i=0; i < length; i += 1) {
-				var generated = generated.concat(cryptoRandomString({length: 1, type: 'base64'}));
-				if (n == 3) {
-					if (i+1 < length) { var generated = generated.concat('-'); }
-					i += 1;
-					n = 0;
-				} else { n += 1; }
+		if (readable == 'true') {
+			if (type == 'symbols') {
+				var symbolic_set = '!"#$%&\'()*+,-.0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+				var generated = readableSequence(length, null, '/', symbolic_set);
+			} else {
+				var generated = readableSequence(length, type, '-');
 			}
-		} else if (type == 'symbols' || type == 'symbols readable') {
+		} else {
 			if (type == 'symbols') {
 				var symbolic_set = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 				var generated = cryptoRandomString({length: length, characters: symbolic_set});
 			} else {
-				var symbolic_set = '!"#$%&\'()*+,-.0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-				for (var i=0; i < length; i += 1) {
-					var generated = generated.concat(cryptoRandomString({length: 1, characters: symbolic_set}));
-					if (n == 3) {
-						if (i+1 < length) { var generated = generated.concat('/'); }
-							i += 1;
-							n = 0;
-					} else { n += 1; }
-				}
+				var generated = cryptoRandomString({length: length, type: type});
 			}
-		} else {
-			var generated = cryptoRandomString({length: length, type: type});
 		}
 
 		$('#generatorOutput').val(generated);
