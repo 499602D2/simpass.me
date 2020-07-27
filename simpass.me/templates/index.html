@@ -49,7 +49,7 @@
 		{% endif %}
 
 		<!-- Local scripts: defined after jquery -->
-		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
+		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.min.js') }}"></script>
 	</head>
 
 	<div id="tipModal" class="modal" tabindex="-1" role="dialog">
@@ -127,7 +127,7 @@
 		</div>
 
 		<!-- Footer -->
-		<footer class="page-footer fixed-bottom justify-content-center">
+		<footer id="footer" class="page-footer fixed-bottom justify-content-center">
 			<!-- Copyright -->
 			<div class="container text-center col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
 				<p>All passwords are generated locally on your device and are cryptographically strong, drawing true randomness from the lowest available source in your system. Passwords are not sent or stored anywhere. This page collects basic analytics with Google Analytics.</p>
