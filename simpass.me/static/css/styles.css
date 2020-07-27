@@ -1,19 +1,19 @@
 /* Available color schemes */
 :root {
 	color-scheme: dark;
-
-	--dark-theme-background: #111;
-	--dark-theme-text: #EEEEEE;
-	--dark-theme-button-color: #212121;
-	--dark-theme-select-color: #424242;
-	--dark-theme-selection-color: #9E9E9E;
+	--theme-background: #111;
+	--theme-text: #EEEEEE;
+	--theme-button-color: #212121;
+	--theme-select-color: #424242;
+	--theme-selection-color: #9E9E9E;
 }
+
 /* General styles */
 body {
 	font-family: 'Ubuntu Mono', monospace;
 
-	color: var(--dark-theme-text);
-	background-color: var(--dark-theme-background);
+	color: var(--theme-text);
+	background-color: var(--theme-background);
 
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -28,11 +28,10 @@ p {
 }
 
 /* Element-specific styles */
-#monky {
+#chimpu {
 	transition: 0.6s;
-	font-size: 20px;
-	width: 34px;
-	height: 34px;
+	width: 32px;
+	height: 32px;
 }
 
 #form_div {
@@ -41,59 +40,64 @@ p {
 	align-items: center;
 }
 
+#lengthSelect,
 #complexitySelect,
-#lengthSelect {
-	background-color: var(--dark-theme-button-color);
-	color: var(--dark-theme-text);
-	border-color: var(--dark-theme-button-color);
+#readableSelect {
+	background-color: var(--theme-button-color);
+	color: var(--theme-text);
+	border-color: var(--theme-button-color);
 }
 
+#lengthSelect:focus,
+#lengthSelect:active,
 #complexitySelect:focus,
 #complexitySelect:active,
-#lengthSelect:focus,
-#lengthSelect:active {
-	border-color: var(--dark-theme-button-color);
+#readableSelect:focus,
+#readableSelect:active {
+	border-color: var(--theme-button-color);
 	box-shadow: none;
 }
 
 #lengthSelect::-moz-selection {
-	color: var(--dark-theme-selection-color);
+	color: var(--theme-selection-color);
 }
 
 #lengthSelect::selection {
-	color: var(--dark-theme-selection-color);
+	color: var(--theme-selection-color);
 }
 
 #copyButton {
-	background-color: var(--dark-theme-button-color);
-	color: var(--dark-theme-text);
-	border-color: var(--dark-theme-button-color);
+	background-color: var(--theme-button-color) !important;
+	color: var(--theme-text);
+	border-color: var(--theme-button-color);
 }
 
 #copyButton:active,
-#copyButton:focus {
-	background-color: var(--dark-theme-button-color);
-	color: var(--dark-theme-text);
+#copyButton:focus,
+#copyButton:hover {
+	color: var(--theme-text);
+	filter: brightness(110%);
+	transition: brightness 0.7s;
+	box-shadow: none;
+	border-color: var(--theme-button-color);
+}
 
-	box-shadow: inset 0em 0em 0em 4em rgba(8, 8, 8, .6);
-	border-color: rgba(6, 6, 6, 1);
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
+/* Get rid of the frustrating jumpiness of the prepend/output field */
+#copyButtonPrepend {
+	margin-right: 0px !important;
 }
 
 #generatorOutput {
-	background-color: var(--dark-theme-select-color);
-	color: var(--dark-theme-text);
-	border-color: var(--dark-theme-select-color);
-	border-left-color: var(--dark-theme-button-color);
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
+	color: #fff;
+	background-color: var(--theme-select-color);
+	border-color: var(--theme-select-color);
+	border-width: 4px;
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
 }
 
 #generatorOutput:focus,
 #generatorOutput:active {
-	border-color: var(--dark-theme-select-color);
-	border-left-color: var(--dark-theme-button-color);
 	box-shadow: none;
 }
 
@@ -105,19 +109,15 @@ p {
 	background: rgba(255, 255, 255, 0);
 }
 
-.copyNotifyText {
-	font-size: 15px;
-	color: var(--dark-theme-text);
-
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.6s ease-out;
-  	will-change: opacity, visibility;
+#copyNotifyText {
+	position: absolute;
+	top: 70%;
 }
 
-#footer {
+.page-footer {
 	background-color: none;
-	color: var(--dark-theme-text);
+	color: var(--theme-text);
+	font-size: 13px;
 }
 
 #sauce,
@@ -125,8 +125,7 @@ p {
 #sauce:visited,
 #sauce:hover,
 #sauce:active {
-	color: var(--dark-theme-text);
-	font-size: 13px;
+	color: var(--theme-text);
 }
 
 /* Class styles */
@@ -137,11 +136,25 @@ p {
 	min-height: 50vh; /* These two lines are counted as one :-)       */
 }
 
-.popover-box {
-	font-family: 'Ubuntu Mono', monospace;
-	font-size: 14px;
+.fieldLabel {
+	color: var(--theme-text);
 }
 
-.fieldLabel {
-	color: var(--dark-theme-text);
+.navbar-brand,
+.navbar-brand:link,
+.navbar-brand:visited,
+.navbar-brand:hover,
+.navbar-brand:active {
+	font-size: 32px;
+	color: var(--theme-text);
+}
+
+.copyNotifyText {
+	font-size: 15px;
+	color: var(--theme-text);
+
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.6s ease-out;
+  	will-change: opacity, visibility;
 }
