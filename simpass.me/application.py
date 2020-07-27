@@ -11,14 +11,14 @@ from flask_htmlmin import HTMLMIN
 from config_tools import load_config, calculate_bundle_hash
 
 # create the flask app, set secret key
-app = Flask(__name__)
-app.secret_key = secrets.token_urlsafe(128)
+application = Flask(__name__)
+application.secret_key = secrets.token_urlsafe(128)
 
 # load configuration into app
-app = load_config(app)
+application = load_config(application)
 
 # use flask_seasurf to prevent cross-site request forging
-csrf = SeaSurf(app)
+csrf = SeaSurf(application)
 
 # setup content security policy for flask_talisman
 csp = {
@@ -40,18 +40,18 @@ csp = {
 # use Flask Talisman for some common HTTP header security options
 # https://github.com/GoogleCloudPlatform/flask-talisman
 talisman = Talisman(
-	app,
+	application,
 	content_security_policy=csp,
 	content_security_policy_nonce_in=['default-src']
 )
 
 # minify HTML responses + CSS/JS, if not in debug mode
 # use flask_htmlmin to minify HTML responses
-app.config['MINIFY_HTML'] = True
-htmlmin = HTMLMIN(app)
+application.config['MINIFY_HTML'] = True
+htmlmin = HTMLMIN(application)
 
 
-@app.errorhandler(404)
+@application.errorhandler(404)
 def page_not_found(caught_error):
 	"""Summary
 
@@ -65,7 +65,7 @@ def page_not_found(caught_error):
 	return render_template('index.html'), 404
 
 
-@app.route('/favicon.ico')
+@application.route('/favicon.ico')
 def favicon():
 	"""Summary
 	Routes the request to /favicon.ico and returns the file.
@@ -74,13 +74,13 @@ def favicon():
 	"""
 
 	return send_from_directory(
-		os.path.join(app.root_path, 'static', 'css', 'img'),
+		os.path.join(application.root_path, 'static', 'css', 'img'),
 		'favicon.png', mimetype='image/png'
 	)
 
 
-@app.route('/')
-@app.route('/index')
+@application.route('/')
+@application.route('/index')
 def index():
 	"""Summary
 	Handles requests to / and /index.
@@ -90,14 +90,14 @@ def index():
 
 	return make_response(render_template(
 			'index.html',
-			analytics=app.config['ANALYTICS'],
-			g_analytics_tracking_id=app.config['TRACKING_ID'],
+			analytics=application.config['ANALYTICS'],
+			g_analytics_tracking_id=application.config['TRACKING_ID'],
 			bundle_hash=calculate_bundle_hash()
 		)
 	)
 
 
-@app.route('/<site_url>')
+@application.route('/<site_url>')
 def load_url(site_url: str):
 	"""Summary
 
@@ -115,14 +115,14 @@ def load_url(site_url: str):
 
 	return make_response(render_template(
 		'index.html',
-		analytics=app.config['ANALYTICS'],
-		g_analytics_tracking_id=app.config['TRACKING_ID'],
+		analytics=application.config['ANALYTICS'],
+		g_analytics_tracking_id=application.config['TRACKING_ID'],
 		bundle_hash=calculate_bundle_hash()
 		)
 	)
 
 
 if __name__ == '__main__':
-	app.run(debug=app.config['SERVER_DEBUG_MODE'],
-		host=app.config['SERVER_HOST'],
-		port=app.config['SERVER_PORT'])
+	application.run(debug=application.config['SERVER_DEBUG_MODE'],
+		host=application.config['SERVER_HOST'],
+		port=application.config['SERVER_PORT'])
