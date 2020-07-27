@@ -3,6 +3,16 @@
 import json
 import os
 
+from hashlib import md5
+
+def calculate_bundle_hash():
+	"""Summary
+	Calculates MD5 hash of the bundle.js file
+	"""
+
+	with open(os.path.join('static', 'scripts', 'bundle.min.js'), 'rb') as file:
+		return md5(file.read()).hexdigest()
+
 def create_config():
 	"""Summary
 	Runs the config file setup if file doesn't exist or is corrupted/missing data.
