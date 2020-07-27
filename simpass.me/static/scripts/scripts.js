@@ -15,21 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
 	// run forever
 	window.refreshIntervalId = window.setInterval(passGen, [250]);
 
-	// listen for copy-button clicks
-	$("#copyButton").click(onCopy);
+	// copy button clicks
+	document.getElementById("copyButton").addEventListener("click", event => {
+		onCopy();
+	});
 
-	// listen for output field clicks
-	$("#generatorOutput").click(onCopy);
+	// output field clicks
+	document.getElementById("generatorOutput").addEventListener("click", event => {
+		onCopy();
+	});
 
 	// spin chimpu
 	spinchimpu();
 });
 
 function onCopy() {
-	navigator.clipboard.writeText(
-		$('#generatorOutput').val()
-	);
-	
+	$('#generatorOutput').focus();
+	$('#generatorOutput').select();
+	document.execCommand("copy");
+
 	calcEntropy();
 	copyNotify();
 	spinchimpu();
@@ -88,17 +92,6 @@ async function copyNotify() {
 		elements[0].style.transition = 'visibility 750ms, opacity 750ms';
 		elements[1].style.transition = 'visibility 750ms, opacity 750ms';
 	}
-}
-
-function copyToClipboard() {
-	// select text
-	var copyText = document.getElementById('generatorOutput');
-
-	copyText.select();
-	copyText.setSelectionRange(0, 99999);
-
-	// Copy the text inside the text field
-	document.execCommand("copy");
 }
 
 function spinchimpu() {
