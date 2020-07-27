@@ -8,9 +8,8 @@ from flask import Flask, request, render_template, make_response, abort, send_fr
 from flask_talisman import Talisman
 from flask_seasurf import SeaSurf
 from flask_htmlmin import HTMLMIN
-from flask_minify import minify
 
-from tools import load_config, calculate_bundle_hash
+from config_tools import load_config, calculate_bundle_hash
 
 # create the flask app, set secret key
 app = Flask(__name__)
@@ -51,9 +50,6 @@ talisman = Talisman(
 # use flask_htmlmin to minify HTML responses
 app.config['MINIFY_HTML'] = True
 htmlmin = HTMLMIN(app)
-
-# use flask_minify to minify JS and CSS
-minify(app=app, html=False, js=False, static=True)
 
 # setup logging
 logging.basicConfig(
