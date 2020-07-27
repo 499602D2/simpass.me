@@ -124,14 +124,20 @@ h3 {
 	color: var(--theme-text);
 }
 
+#tip {
+	box-shadow: none;
+}
+
 #tip:hover {
 	text-decoration: underline;
+	box-shadow: none;
 }
 
 #tip:visited,
 #tip:active,
 #tip:link {
 	color: var(--theme-text);
+	box-shadow: none;
 }
 
 .close {
