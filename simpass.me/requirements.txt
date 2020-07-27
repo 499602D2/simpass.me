@@ -1,0 +1,4 @@
+flask
+flask_talisman
+flask_seasurf
+flask_htmlmin
