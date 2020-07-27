@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="author" content="499602D2">
+		<meta name="google-site-verification" content="x5Z0c74BbYXKqgkoCuMAGK76fUoawdgvAc-uRIdAJu4"/>
 		<meta name="robots" content="index">
 		<meta name="description" content="simpass.me allows you to generate cryptographically secure, truly random passwords, hashes, and tokens locally on your device.">
 
@@ -51,6 +52,29 @@
 		<!-- Local scripts: defined after jquery -->
 		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
 	</head>
+
+	<div id="tipModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Tip jar</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="tipModalBody" class="modal-body">
+					<p>If you'd like to help keep the site running, you can tip some Ether. All tips go towards covering the running costs of this page, like the domain name and AWS.</p>
+
+					<p class="mb-1">I'm just a uni student, so all help is gratefully accepted 😄</p>
+
+					<div class="container-fluid" align="center">
+						<img id="tipQR" class="mb-1" src="{{ url_for('static', filename='img/tip-qr.jpg') }}">
+						<p class="mt-1 mb-0">Ethereum: 0xdeb39019339827dc2593A1Eb36C0001051e82892</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<body>
 		<nav class="navbar justify-content-center align-items-center pt-5">
@@ -115,7 +139,7 @@
 				 | 
 				<a nonce="{{ csp_nonce() }}" id="bundle-hash" title="bundle.min.js checksum">MD5 {{ bundle_hash }}</a>
 				 | 
-				<a id="tip">support site</a>
+				<a id="tip" data-toggle="modal" data-target="#tipModal" href="#tipModal">tip jar</a>
 			</div>
 		</footer>
 	</body>
