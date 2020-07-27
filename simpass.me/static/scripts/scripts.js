@@ -25,9 +25,37 @@ document.addEventListener('DOMContentLoaded', () => {
 		onCopy();
 	});
 
+	if ($( window ).width() < 768) {
+		$("input").focus(function(){
+			hideFooter();
+		});
+
+		$("input").focusout(function(){
+			showFooter();
+		});
+
+		$("select").focus(function(){
+			hideFooter();
+		});
+
+		$("select").focusout(function(){
+			showFooter();
+		});
+	}
+
 	// spin chimpu
 	spinchimpu();
 });
+
+function hideFooter() {
+	document.getElementById('footer').style.opacity = '0';
+	document.getElementById('footer').style.transition = 'opacity 200ms ease-out';
+}
+
+function showFooter() {
+	document.getElementById('footer').style.opacity = '1';
+	document.getElementById('footer').style.transition = 'opacity 650ms ease-in';
+}
 
 function onCopy() {
 	$('#generatorOutput').focus();
