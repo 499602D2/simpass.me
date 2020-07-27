@@ -4,10 +4,17 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="author" content="simpass.me">
+		<meta name="author" content="499602D2">
+		<meta name="robots" content="index">
+		<meta name="description" content="simpass.me allows you to generate cryptographically secure, truly random passwords, hashes, and tokens locally on your device.">
+
+		<meta property="og:title" content="simpass.me">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://simpass.me">
+    <meta property="og:description" content="simpass.me allows you to generate cryptographically secure, truly random passwords, hashes, and tokens locally on your device.">
 
 		<!-- Dark and light theme -->
-		<meta name="color-scheme" content="dark light">
+		<meta name="color-scheme" content="dark">
 
 		<!-- Title -->
 		<title>simpass.me</title>
@@ -29,49 +36,67 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script>
 
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		{% if analytics %}
+		<script async nonce="{{ csp_nonce() }}" src="https://www.googletagmanager.com/gtag/js?id={{ g_analytics_tracking_id }}"></script>
+		<script nonce="{{ csp_nonce() }}">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', '{{ g_analytics_tracking_id }}');
+		</script>
+		{% endif %}
+
 		<!-- Local scripts: defined after jquery -->
 		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
 	</head>
 
 	<body>
-		<nav class="navbar navbar-dark justify-content-center align-items-center pt-5">
+		<nav class="navbar justify-content-center align-items-center pt-5">
 			<a class="navbar-brand" href="/" title="Simple password generation and management locally">simpass.me</a>
-			<img id="monky" class="pt-1" title="monky :)" src="{{ url_for('static', filename='img/favicon.png') }}">
+			<img id="chimpu" class="pt-1" title="chimpu :)" src="{{ url_for('static', filename='img/favicon.png') }}">
 		</nav>
 
 		<div class="h-100 d-flex justify-content-center align-items-center vertical-center pt-5">
 			<div>
 				<div id="form_div" class="form py-4">
-					<div class="form-row justify-content-center px-5 mx-5">
-						<div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-4 text-center">
+					<div class="form-row justify-content-center mx-3 px-2 px-sm-2 px-md-2 mx-lg-2 px-xl-2">
+						<div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-center">
 							<label for="lengthSelect" class="fieldLabel">length</label>
 							<input id="lengthSelect" type="tel" min="1" value="14" class="form-control" placeholder="length" required>
 						</div>
 
-						<div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-4 text-center">
+						<div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
 							<label for="complexitySelect" class="fieldLabel">complexity</label>
 							<select id="complexitySelect" class="custom-select">
-								<option value="readable" selected>readable</option>
-								<option value="base64">base64</option>
+								<option value="base64" selected>base64</option>
 								<option value="symbols">symbols</option>
-								<option value="symbols readable">symbols (r)</option>
-								<option value="hex">hexadecimal</option>
+								<option value="hex">hex</option>
 								<option value="url-safe">url-safe</option>
 								<option value="numeric">numeric</option>
 								<option value="distinguishable">distinct</option>
 							</select>
 						</div>
 
+						<div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 text-center">
+							<label for="readableSelect" class="fieldLabel">split</label>
+							<select id="readableSelect" class="custom-select">
+								<option value="true" selected>yes</option>
+								<option value="false">no</option>
+							</select>
+						</div>
+
 						<div class="py-1 col-12"></div>
 
 						<div class="input-group py-4 mb-3 col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
-							<div class="input-group-prepend">
-								<button id="copyButton" class="btn btn-outline-secondary" type="button">copy</button>
+							<div id="copyButtonPrepend" class="input-group-prepend">
+								<button id="copyButton" class="btn" type="button" aria-label="password copy button">copy</button>
 							</div>
 
 							<input id="generatorOutput" type="text" class="form-control" placeholder="" aria-label="password generator output" readonly>
 
-							<p id="copyNotifyText" class="container px-5 col-12 mt-3 text-center copyNotifyText"><a class="p-0 mr-1 copyNotifyText">✅</a> Password copied! <a id="entropyVal" class="p-0">0</a> bits of entropy.</p>
+							<p id="copyNotifyText" class="container px-0 mx-0 col-12 mt-3 text-center copyNotifyText"><a class="p-0 mr-1 copyNotifyText">✅</a> Password copied! <a id="entropyVal" class="p-0">0</a> bits of entropy.</p>
 						</div>
 					</div>
 				</div>
@@ -79,14 +104,18 @@
 		</div>
 
 		<!-- Footer -->
-		<footer class="page-footer fixed-bottom">
+		<footer class="page-footer fixed-bottom justify-content-center">
 			<!-- Copyright -->
 			<div class="container text-center col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
-				<p>All passwords are generated locally on your device and are cryptographically strong, drawing randomness from the lowest available source in your system. Passwords are not sent or stored anywhere. This page collects basic analytics with Google Analytics.</p>
+				<p>All passwords are generated locally on your device and are cryptographically strong, drawing true randomness from the lowest available source in your system. Passwords are not sent or stored anywhere. This page collects basic analytics with Google Analytics.</p>
 			</div>
 
 			<div class="footer-copyright text-center pb-3">
 				<a id="sauce" href="https://github.com/499602D2/simpass.me">source code</a>
+				 | 
+				<a nonce="{{ csp_nonce() }}" id="bundle-hash" title="bundle.min.js checksum">MD5 {{ bundle_hash }}</a>
+				 | 
+				<a id="tip">support site</a>
 			</div>
 		</footer>
 	</body>
