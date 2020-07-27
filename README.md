@@ -1,4 +1,4 @@
-### simpass.me: simple password management and generation locally
+# simpass.me: simple password management and generation locally
 
 
 ### Security
