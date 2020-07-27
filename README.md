@@ -9,7 +9,7 @@ Password generation is performed with the excellent [crypto-random-string](https
 
 ### What is bundle.js?
 
-`bundle.js` has been generated with [browserify](https://github.com/browserify/browserify). `Scripts.js` is the "base file", which browserify turns into a servable bundle. This file is then minified.
+`bundle.js` has been generated with [browserify](https://github.com/browserify/browserify). `scripts.js` is the "base file", which browserify turns into a servable bundle. This file is then minified.
 
 ### Minification
 
