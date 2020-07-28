@@ -28,25 +28,10 @@
 		<!-- Local CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
 
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-
 		<!-- Optional JavaScript for Bootstrap: jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script>
-
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		{% if analytics %}
-		<script async nonce="{{ csp_nonce() }}" src="https://www.googletagmanager.com/gtag/js?id={{ g_analytics_tracking_id }}"></script>
-		<script nonce="{{ csp_nonce() }}">
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', '{{ g_analytics_tracking_id }}');
-		</script>
-		{% endif %}
 
 		<!-- Local scripts: defined after jquery -->
 		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.min.js') }}"></script>
@@ -130,7 +115,7 @@
 		<footer id="footer" class="page-footer fixed-bottom justify-content-center">
 			<!-- Copyright -->
 			<div class="container text-center col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
-				<p>All passwords are generated locally on your device and are cryptographically strong, drawing true randomness from the lowest available source in your system. Passwords are not sent or stored anywhere. This page collects basic analytics with Google Analytics.</p>
+				<p>All passwords are generated locally on your device and are cryptographically strong, drawing true randomness from the lowest available source in your system. Passwords are not sent or stored anywhere.</p>
 			</div>
 
 			<div class="footer-copyright text-center pb-3">
