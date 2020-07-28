@@ -29,7 +29,10 @@ csp = {
 		'googletagmanager.com',
 		'cdnjs.cloudflare.com',
 		'code.jquery.com',
-		'google-analytics.com',
+
+		'www.google-analytics.com',
+		'https://www.google-analytics.com',
+		'https://stats.g.doubleclick.net',
 
 		'*.google.com',
 		'*.gstatic.com',
@@ -40,7 +43,8 @@ csp = {
 	'img-src': {
 		'\'self\'',
 		'\'self\' data:',
-		'google-analytics.com'
+		'https://google-analytics.com',
+		'https://www.google-analytics.com'
 	}
 }
 
