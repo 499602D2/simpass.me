@@ -20,5 +20,8 @@
   "dependencies": {
     "crypto-random-string": "^3.2.0",
     "string-entropy": "0.0.2"
+  },
+  "devDependencies": {
+    "common-shakeify": "^0.6.2"
   }
 }
