@@ -13,6 +13,19 @@ def calculate_bundle_hash():
 	with open(os.path.join('static', 'scripts', 'bundle.min.js'), 'rb') as file:
 		return md5(file.read()).hexdigest()
 
+
+def store_config(config_json):
+	"""Summary
+
+	Args:
+	    config_json (dict): new config dictionary
+	"""
+	with open('server_config.json', 'w') as config_file:
+		json.dump(config_json, config_file, indent=4)
+
+	print('✅ Updated config dumped!')
+
+
 def create_config():
 	"""Summary
 	Runs the config file setup if file doesn't exist or is corrupted/missing data.
@@ -23,24 +36,16 @@ def create_config():
 		server_port = input('Enter server port (default: 5000): ')
 		print()
 
-		analytics = bool('y' in input('Use Google Analytics? (y/n): '))
-		if analytics:
-			tracking_id = input('Enter G Analytics tracking id: ')
-		else:
-			tracking_id = None
-
 		config = {
 			'SERVER_DEBUG_MODE': debug_mode,
 			'SERVER_HOST': server_host,
-			'SERVER_PORT': server_port,
-			'ANALYTICS': analytics,
-			'TRACKING_ID': tracking_id
+			'SERVER_PORT': server_port
 		}
 
 		json.dump(config, config_file, indent=4)
 
 
-def load_config(app):
+def load_config(app, mode):
 	"""Summary
 	Load variables from configuration file.
 	"""
@@ -61,8 +66,7 @@ def load_config(app):
 		try:
 			# check if all the server config keys exist
 			config_keys = {
-				'SERVER_DEBUG_MODE', 'SERVER_HOST', 'SERVER_PORT',
-				'ANALYTICS', 'TRACKING_ID'
+				'SERVER_DEBUG_MODE', 'SERVER_HOST', 'SERVER_PORT'
 			}
 
 			# if there are any missing keys, re-run the setup
@@ -71,11 +75,16 @@ def load_config(app):
 				print('Server configuration is missing some values: re-running setup...')
 				create_config()
 
-			# store configuration in app
-			for key, val in config.items():
-				app.config[key] = val
+			if mode == 'load_into_app':
+				# store configuration in app
+				for key, val in config.items():
+					app.config[key] = val
 
-			return app
+				return app
+
+			if mode == 'load_into_json':
+				return config
+
 		except KeyError:
 			print('KeyError: configuration is missing data. Running config setup...')
 			create_config()
