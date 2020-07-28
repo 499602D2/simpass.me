@@ -191,11 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	if ($( window ).width() < 768) {
-		$("input").focus(function(){
+		$("#lengthSelect").focus(function(){
 			hideFooter();
 		});
 
-		$("input").focusout(function(){
+		$("#lengthSelect").focusout(function(){
 			showFooter();
 		});
 
