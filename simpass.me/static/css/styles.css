@@ -8,6 +8,11 @@
 	--theme-selection-color: #9E9E9E;
 }
 
+@font-face {
+	font-family: 'Ubuntu Mono';
+	src: url('fonts/UbuntuMono-Regular.ttf');
+}
+
 /* General styles */
 body {
 	font-family: 'Ubuntu Mono', monospace;
@@ -111,9 +116,9 @@ h3 {
 }
 
 .page-footer {
-	background-color: none;
+	background-color: rgba(255, 255, 255, 0);
 	color: var(--theme-text);
-	font-size: 11px;
+	font-size: 12px;
 }
 
 #sauce,
