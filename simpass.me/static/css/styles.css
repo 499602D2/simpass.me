@@ -1,16 +1,10 @@
 /* Available color schemes */
 :root {
-	color-scheme: dark;
 	--theme-background: #111;
 	--theme-text: #EEEEEE;
 	--theme-button-color: #212121;
 	--theme-select-color: #424242;
 	--theme-selection-color: #9E9E9E;
-}
-
-@font-face {
-	font-family: 'Ubuntu Mono';
-	src: url('fonts/UbuntuMono-Regular.ttf');
 }
 
 /* General styles */
@@ -125,12 +119,13 @@ h3 {
 #sauce:link,
 #sauce:visited,
 #sauce:hover,
-#sauce:active {
+#sauce:active,
+#sauce:focus,
+#sauve:focus:active {
 	color: var(--theme-text);
-}
-
-#tip {
 	box-shadow: none;
+	background-image: none;
+	outline: 0;
 }
 
 #tip:hover {
@@ -140,9 +135,13 @@ h3 {
 
 #tip:visited,
 #tip:active,
-#tip:link {
+#tip:link,
+#tip:focus,
+#tip:focus:active {
 	color: var(--theme-text);
 	box-shadow: none;
+	background-image: none;
+	outline: 0;
 }
 
 .close {
@@ -174,11 +173,22 @@ h3 {
 }
 
 /* Class styles */
-.vertical-center {
-	display: flex;
-	align-items: center;
-	min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
-	min-height: 50vh; /* These two lines are counted as one :-)       */
+@media screen and (min-width: 768px) {
+	.vertical-center {
+		display: flex;
+		align-items: center;
+		min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+		min-height: 50vh; /* These two lines are counted as one :-)       */
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.vertical-center {
+		display: flex;
+		align-items: center;
+		min-height: 40%;  /* Fallback for browsers do NOT support vh unit */
+		min-height: 40vh; /* These two lines are counted as one :-)       */
+	}
 }
 
 .fieldLabel {
