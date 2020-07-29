@@ -8,38 +8,41 @@
 		<meta name="robots" content="index">
 		<meta name="description" content="Simpass.me is an open-source cryptographically secure random password generator that runs locally in your browser.">
 		<meta name="keywords" content="password generator, secure, random password, cryptographically secure random password generator, token generator, open-source">
+		<meta name="theme-color" content="#212121"/>
 
 		<meta property="og:title" content="Simpass.me">
 	    <meta property="og:type" content="website">
 	    <meta property="og:url" content="https://simpass.me">
 	    <meta property="og:description" content="Simpass.me is an open-source cryptographically secure random password generator that runs locally in your browser.">
 
-		<!-- Dark and light theme -->
+		<!-- Dark theme -->
 		<meta name="color-scheme" content="dark">
 
 		<!-- Title -->
 		<title>simpass.me</title>
 
 		<!-- favicon, apple-touch-icon -->
-		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
+		<link rel="shortcut icon" type="image/webp" href="{{ url_for('static', filename='img/favicon.webp') }}"/>
 		<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}"/>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g==" crossorigin="anonymous" />
 
+		<!-- Fonts -->
+		<style nonce="{{ csp_nonce() }}">@font-face { font-family: 'Ubuntu Mono'; src: url('static/css/fonts/UbuntuMono-Regular.ttf'); }</style>
+
 		<!-- Local CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
 
 		<!-- Optional JavaScript for Bootstrap: jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
+		<script async src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous"></script>
 
 		<!-- Local scripts: defined after jquery -->
-		<script nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.min.js') }}"></script>
+		<script defer nonce="{{ csp_nonce() }}" src="{{ url_for('static', filename='scripts/bundle.min.js') }}"></script>
 	</head>
 
-	<div id="tipModal" class="modal" tabindex="-1" role="dialog">
+	<div id="tipModal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -65,7 +68,7 @@
 	<body>
 		<nav class="navbar justify-content-center align-items-center pt-5">
 			<a class="navbar-brand" href="/" title="Simple password generation and management locally">simpass.me</a>
-			<img id="chimpu" class="pt-1" title="chimpu :)" src="{{ url_for('static', filename='img/favicon.png') }}">
+			<img id="chimpu" class="py-0 my-2" title="chimpu :)" src="{{ url_for('static', filename='img/favicon.webp') }}">
 		</nav>
 
 		<div class="h-100 d-flex justify-content-center align-items-center vertical-center pt-5">
@@ -121,11 +124,11 @@
 			</div>
 
 			<div class="footer-copyright text-center pb-2">
-				<a id="sauce" href="https://github.com/499602D2/simpass.me">source code</a>
-				 | 
-				<a nonce="{{ csp_nonce() }}" id="bundle-hash" title="bundle.min.js checksum">MD5 {{ bundle_hash }}</a>
-				 | 
-				<a id="tip" data-toggle="modal" data-target="#tipModal" href="#tipModal">tip jar</a>
+				<a id="sauce" href="https://github.com/499602D2/simpass.me">source</a>
+				 · 
+				<a nonce="{{ csp_nonce() }}" id="bundle-hash" title="bundle.min.js checksum">{{ bundle_hash }}</a>
+				 · 
+				<a id="tip" data-toggle="modal" data-target="#tipModal" href="#tipModal">donate</a>
 			</div>
 		</footer>
 	</body>
