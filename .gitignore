@@ -10,3 +10,5 @@ package.json
 package-lock.json
 postcss.config.js
 simpass.me/static/scripts/scripts.min.js
+package-lock.json
+package.json
