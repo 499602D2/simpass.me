@@ -4,14 +4,15 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="author" content="simpass.me">
+		<meta name="author" content="Simpass.me">
 		<meta name="robots" content="index">
-		<meta name="description" content="simpass.me allows you to generate cryptographically secure, truly random passwords, hashes, and tokens locally on your device.">
+		<meta name="description" content="Simpass.me is an open-source cryptographically secure random password generator that runs locally in your browser.">
+		<meta name="keywords" content="password generator, secure, random password, cryptographically secure random password generator, token generator, open-source">
 
-		<meta property="og:title" content="simpass.me">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://simpass.me">
-    <meta property="og:description" content="simpass.me allows you to generate cryptographically secure, truly random passwords, hashes, and tokens locally on your device.">
+		<meta property="og:title" content="Simpass.me">
+	    <meta property="og:type" content="website">
+	    <meta property="og:url" content="https://simpass.me">
+	    <meta property="og:description" content="Simpass.me is an open-source cryptographically secure random password generator that runs locally in your browser.">
 
 		<!-- Dark and light theme -->
 		<meta name="color-scheme" content="dark">
@@ -19,8 +20,9 @@
 		<!-- Title -->
 		<title>simpass.me</title>
 
-		<!-- favicon -->
+		<!-- favicon, apple-touch-icon -->
 		<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
+		<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}"/>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g==" crossorigin="anonymous" />
@@ -118,7 +120,7 @@
 				<p>All passwords are generated locally on your device and are cryptographically strong, drawing true randomness from the lowest available source in your system. Passwords are not sent or stored anywhere.</p>
 			</div>
 
-			<div class="footer-copyright text-center pb-3">
+			<div class="footer-copyright text-center pb-2">
 				<a id="sauce" href="https://github.com/499602D2/simpass.me">source code</a>
 				 | 
 				<a nonce="{{ csp_nonce() }}" id="bundle-hash" title="bundle.min.js checksum">MD5 {{ bundle_hash }}</a>
