@@ -75,7 +75,23 @@ def favicon():
 
 	return send_from_directory(
 		os.path.join(application.root_path, 'static', 'css', 'img'),
-		'favicon.png', mimetype='image/png'
+		'favicon.webp', mimetype='image/webp'
+	)
+
+
+@application.route('/static/img/icons/apple-touch-icon.png')
+def apple_touch_icon():
+	return send_from_directory(
+		os.path.join(
+			application.root_path, 'static', 'css', 'img'),
+		'apple-touch-icon.png', mimetype='image/png'
+	)
+
+@application.route('/robots.txt')
+def robots_txt():
+	return send_from_directory(
+		os.path.join(application.root_path, 'static'),
+		'robots.txt', mimetype='text/plain'
 	)
 
 
