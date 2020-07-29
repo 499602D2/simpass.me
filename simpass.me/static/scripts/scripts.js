@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			showFooter();
 		});
 
+		/*
 		$("select").focus(function(){
 			hideFooter();
 		});
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		$("select").focusout(function(){
 			showFooter();
 		});
+		*/
 	}
 
 	// spin chimpu
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function hideFooter() {
 	document.getElementById('footer').style.opacity = '0';
-	document.getElementById('footer').style.transition = 'opacity 200ms ease-out';
+	document.getElementById('footer').style.transition = 'opacity 0ms';
 }
 
 function showFooter() {
