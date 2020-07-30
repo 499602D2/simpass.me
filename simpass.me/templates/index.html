@@ -29,7 +29,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g==" crossorigin="anonymous" />
 
 		<!-- Fonts -->
-		<style nonce="{{ csp_nonce() }}">@font-face { font-family: 'Ubuntu Mono'; src: url('static/css/fonts/UbuntuMono-Regular.ttf'); }</style>
+		<style nonce="{{ csp_nonce() }}">@font-face { font-family: 'Ubuntu Mono'; src: url('static/css/fonts/UbuntuMono-Regular.woff2'); font-display: swap; }</style>
 
 		<!-- Local CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
