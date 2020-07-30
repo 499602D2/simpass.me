@@ -75,7 +75,7 @@ def favicon():
 
 	return send_from_directory(
 		os.path.join(application.root_path, 'static', 'css', 'img'),
-		'favicon.webp', mimetype='image/webp'
+		'favicon.png', mimetype='image/png'
 	)
 
 
