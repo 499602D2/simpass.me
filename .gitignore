@@ -5,7 +5,6 @@ app_log.log
 src/index.js
 simpass.me/server_config.json
 simpass.me/__pycache__
-simpass.me/pre-deploy.py
 package.json
 package-lock.json
 postcss.config.js
