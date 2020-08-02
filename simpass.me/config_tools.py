@@ -36,10 +36,19 @@ def create_config():
 		server_port = input('Enter server port (default: 5000): ')
 		print()
 
+		analytics = bool('y' in input('Use Google Analytics? (y/n): '))
+
+		if analytics:
+			tracking_id = input('Enter G Analytics tracking id: ')
+		else:
+			tracking_id = None
+
 		config = {
 			'SERVER_DEBUG_MODE': debug_mode,
 			'SERVER_HOST': server_host,
-			'SERVER_PORT': server_port
+			'SERVER_PORT': server_port,
+			'ANALYTICS': analytics,
+ 			'TRACKING_ID': tracking_id
 		}
 
 		json.dump(config, config_file, indent=4)
@@ -66,7 +75,8 @@ def load_config(app, mode):
 		try:
 			# check if all the server config keys exist
 			config_keys = {
-				'SERVER_DEBUG_MODE', 'SERVER_HOST', 'SERVER_PORT'
+				'SERVER_DEBUG_MODE', 'SERVER_HOST', 'SERVER_PORT',
+				'ANALYTICS', 'TRACKING_ID'
 			}
 
 			# if there are any missing keys, re-run the setup

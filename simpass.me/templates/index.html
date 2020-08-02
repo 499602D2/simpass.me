@@ -31,6 +31,18 @@
 		<!-- Fonts -->
 		<style nonce="{{ csp_nonce() }}">@font-face { font-family: 'Ubuntu Mono'; src: url('static/css/fonts/UbuntuMono-Regular.woff2'); font-display: swap; }</style>
 
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		{% if analytics %}
+		<script async nonce="{{ csp_nonce() }}" src="https://www.googletagmanager.com/gtag/js?id={{ g_analytics_tracking_id }}"></script>
+		<script nonce="{{ csp_nonce() }}">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', '{{ g_analytics_tracking_id }}');
+		</script>
+		{% endif %}
+
 		<!-- Local CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}">
 

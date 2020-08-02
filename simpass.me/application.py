@@ -28,12 +28,20 @@ csp = {
 
 		'cdnjs.cloudflare.com',
 		'code.jquery.com',
-		'*.fontawesome.com'
+		'*.fontawesome.com',
+
+		'googletagmanager.com',
+		'www.google-analytics.com',
+		'https://www.google-analytics.com',
+		'https://stats.g.doubleclick.net'
+
 	},
 
 	'img-src': {
 		'\'self\'',
-		'\'self\' data:'
+		'\'self\' data:',
+		'https://google-analytics.com',
+		'https://www.google-analytics.com'
 	}
 }
 
@@ -106,6 +114,8 @@ def index():
 
 	return make_response(render_template(
 			'index.html',
+			analytics=application.config['ANALYTICS'],
+			g_analytics_tracking_id=application.config['TRACKING_ID'],
 			bundle_hash=calculate_bundle_hash()
 		)
 	)
@@ -129,6 +139,8 @@ def load_url(site_url: str):
 
 	return make_response(render_template(
 		'index.html',
+		analytics=application.config['ANALYTICS'],
+		g_analytics_tracking_id=application.config['TRACKING_ID'],
 		bundle_hash=calculate_bundle_hash()
 		)
 	)
