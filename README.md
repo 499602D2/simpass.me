@@ -16,4 +16,4 @@ Password generation is performed with the excellent [crypto-random-string](https
 
 The domain serves extremely minified versions of the files found in this repository. The served `bundle.js` file has been minified with [babel-minify](https://github.com/babel/minify/tree/master/packages/babel-minify). Hash of the served JS file (`bundle.min.js`) can be found in the footer of the page, and is recalculated on each request: you can verify that they are equal by either trusting the backend and that the hashes listed here are valid, or performing a direct comparison of the checksums yourself.
 
-Current bundle.min.js MD5 checksum: `3ebea04081bc1128ea7caf2315619c3e`
+Current bundle.min.js MD5 checksum: `454ce512b504c80d4f0334e0386959e8`

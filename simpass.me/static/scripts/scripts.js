@@ -33,16 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		$("#lengthSelect").focusout(function(){
 			showFooter();
 		});
-
-		/*
-		$("select").focus(function(){
-			hideFooter();
-		});
-
-		$("select").focusout(function(){
-			showFooter();
-		});
-		*/
 	}
 
 	// spin chimpu
