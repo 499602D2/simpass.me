@@ -1,6 +1,6 @@
 # simpass.me: simple password management and generation locally
 
-The application is currently hosted at https://simpass.me.
+~~The application is currently hosted at https://simpass.me.~~
 
 ### Security
 
