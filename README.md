@@ -2,6 +2,8 @@
 
 ~~The application is currently hosted at https://simpass.me.~~
 
+![preview](site.png)
+
 ### Security
 
 All passwords are generated entirely on-device, with nothing sent back to the server.
